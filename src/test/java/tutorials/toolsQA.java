@@ -107,7 +107,7 @@ public class toolsQA {
         System.out.println("\n Content-Type value is: " + contentType);
 
         String serverType = response.header("Server");
-        Assert.assertEquals(serverType, "nginx/1.12.2");
+        Assert.assertEquals(serverType, "nginx/1.14.0");
         System.out.println("\n Server value is: " + serverType);
 
         String acceptedLanguage = response.header("Content-Encoding");
@@ -162,11 +162,11 @@ public class toolsQA {
         RequestSpecification request = RestAssured.given();
 
         JSONObject requestParams = new JSONObject();
-        requestParams.put("FirstName", "Johnn");
-        requestParams.put("LastName", "Doee");
-        requestParams.put("UserName", "JohnDoe2018b");
+        requestParams.put("FirstName", "Alan");
+        requestParams.put("LastName", "Doe");
+        requestParams.put("UserName", "AlanDoe" + System.currentTimeMillis());
         requestParams.put("Password", "password123");
-        requestParams.put("Email",  "alezandru.qa1@gmail.com");
+        requestParams.put("Email",  "email.template"+System.currentTimeMillis()+"@gmail.com");
 
         request.header("Content-Type", "application/json");
         request.body(requestParams.toJSONString());
@@ -175,13 +175,13 @@ public class toolsQA {
         String responseBody = response.getBody().asString();
         System.out.println("Response body is: \n" + responseBody);
         int statusCode = response.getStatusCode();
-        Assert.assertEquals(statusCode, "200");
+
         String successCode = response.jsonPath().get("SuccessCode");
-        Assert.assertEquals( "Correct Success code was returned", successCode, "OPERATION_SUCCESS");
+        Assert.assertEquals(successCode,"OPERATION_SUCCESS", "Correct Success code was returned");
     }
 
     @Test
-    public void RegistrationSuccessful1()
+    public void RegistrationSuccessfull()
     {
         RestAssured.baseURI ="http://restapi.demoqa.com/customer";
         RequestSpecification request = RestAssured.given();
@@ -223,16 +223,16 @@ public class toolsQA {
     }
 
     @Test
-    public void RegistrationSuccessful() {
+    public void deserializeRegistrationSuccessfull() {
         RestAssured.baseURI ="http://restapi.demoqa.com/customer";
         RequestSpecification request = RestAssured.given();
 
         JSONObject requestParams = new JSONObject();
-        requestParams.put("FirstName", "Virender");
-        requestParams.put("LastName", "Singh");
-        requestParams.put("UserName", "63userf2d3d2011");
-        requestParams.put("Password", "password1");
-        requestParams.put("Email",  "ed26dff39@gmail.com");
+        requestParams.put("FirstName", "Alan");
+        requestParams.put("LastName", "Doe");
+        requestParams.put("UserName", "AlanDoe" + System.currentTimeMillis());
+        requestParams.put("Password", "password123");
+        requestParams.put("Email",  "email.template"+ System.currentTimeMillis() + "@gmail.com");
 
         request.body(requestParams.toJSONString());
         Response response = request.post("/register");
